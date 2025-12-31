@@ -1,6 +1,6 @@
 .footer {
-  background: var(--secondary-blue);
-  padding: 3rem 0 2rem;
+  background: linear-gradient(135deg, var(--secondary-blue) 0%, var(--primary-blue) 100%);
+  padding: 3rem 0;
 }
 
 .footer-container {

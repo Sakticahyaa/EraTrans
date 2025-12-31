@@ -13,9 +13,9 @@ const MainPage = () => {
 
   const heroImages = ['/img/hero1.webp', '/img/hero2.webp', '/img/hero3.jpg'];
   const busImages = [
-    { id: 1, image: '/img/bus1.jpeg', name: 'Masriried', route: '/bus1' },
+    { id: 1, image: '/img/bus1.webp', name: 'Masrafi', route: '/bus1' },
     { id: 2, image: '/img/bus2.webp', name: 'Petr Cech', route: '/bus2' },
-    { id: 3, image: '/img/bus3.webp', name: 'Masrafi', route: '/bus3' }
+    { id: 3, image: '/img/bus3.jpeg', name: 'Masriried', route: '/bus3' }
   ];
   const docImages = ['/img/doc1.jpg', '/img/doc2.webp', '/img/doc3.jpeg', '/img/doc4.jpg', '/img/doc5.jpg'];
   const services = [
@@ -38,7 +38,7 @@ const MainPage = () => {
     }, 4000);
 
     const docInterval = setInterval(() => {
-      setCurrentDocSlide((prev) => (prev + 1 >= docImages.length ? 0 : prev + 1));
+      setCurrentDocSlide((prev) => prev + 1);
     }, 5000);
 
     return () => {
@@ -56,12 +56,26 @@ const MainPage = () => {
   };
 
   const handleDocPrev = () => {
-    setCurrentDocSlide((prev) => (prev - 1 < 0 ? docImages.length - 1 : prev - 1));
+    setCurrentDocSlide((prev) => prev - 1);
   };
 
   const handleDocNext = () => {
-    setCurrentDocSlide((prev) => (prev + 1 >= docImages.length ? 0 : prev + 1));
+    setCurrentDocSlide((prev) => prev + 1);
   };
+
+  useEffect(() => {
+    if (currentDocSlide >= docImages.length) {
+      const timeout = setTimeout(() => {
+        setCurrentDocSlide(currentDocSlide - docImages.length);
+      }, 500);
+      return () => clearTimeout(timeout);
+    } else if (currentDocSlide < 0) {
+      const timeout = setTimeout(() => {
+        setCurrentDocSlide(currentDocSlide + docImages.length);
+      }, 500);
+      return () => clearTimeout(timeout);
+    }
+  }, [currentDocSlide, docImages.length]);
 
   return (
     <div className="main-page">
@@ -92,10 +106,10 @@ const MainPage = () => {
       {/* Section 2: Layanan */}
       <section id="layanan" className="services-section">
         <div className="container">
-          <h2 className="section-title">Layanan Kami</h2>
+          <h2 className="section-title" data-aos="fade-up">Layanan Kami</h2>
           <div className="services-grid">
             {services.map((service, index) => (
-              <div key={index} className="service-card">
+              <div key={index} className="service-card" data-aos="fade-up" data-aos-delay={index * 100}>
                 <div className="service-image">
                   <img src={service.image} alt={service.title} />
                 </div>
@@ -110,10 +124,10 @@ const MainPage = () => {
       {/* Section 3: Armada */}
       <section id="armada" className="fleet-section">
         <div className="container">
-          <h2 className="section-title">Armada Bis Pariwisata</h2>
+          <h2 className="section-title" data-aos="fade-up">Armada Bis Pariwisata</h2>
           <div className="fleet-slider">
-            {busImages.map((bus) => (
-              <div key={bus.id} className="fleet-item">
+            {busImages.map((bus, index) => (
+              <div key={bus.id} className="fleet-item" data-aos="zoom-in" data-aos-delay={index * 100}>
                 <div className="fleet-image">
                   <img src={bus.image} alt={bus.name} />
                 </div>
@@ -130,8 +144,8 @@ const MainPage = () => {
       {/* Section 4: Dokumentasi */}
       <section id="dokumentasi" className="documentation-section">
         <div className="container">
-          <h2 className="section-title">Dokumentasi</h2>
-          <div className="doc-slider-container">
+          <h2 className="section-title" data-aos="fade-up">Dokumentasi</h2>
+          <div className="doc-slider-container" data-aos="fade-up" data-aos-delay="200">
             <button className="slider-arrow left" onClick={handleDocPrev}>
               <FaChevronLeft />
             </button>
@@ -140,10 +154,10 @@ const MainPage = () => {
                 className="doc-slider-track"
                 style={{ transform: `translateX(-${currentDocSlide * (33.333 + 1.5)}%)` }}
               >
-                {docImages.map((img, index) => (
+                {[...docImages, ...docImages, ...docImages].map((img, index) => (
                   <div key={index} className="doc-slide">
                     <div className="doc-image">
-                      <img src={img} alt={`Documentation ${index + 1}`} />
+                      <img src={img} alt={`Documentation ${(index % docImages.length) + 1}`} />
                     </div>
                   </div>
                 ))}
@@ -158,14 +172,17 @@ const MainPage = () => {
 
       {/* Section 5: Reservasi */}
       <section id="reservasi" className="reservation-section">
+        <div className="reservation-overlay"></div>
         <div className="container">
-          <h2 className="section-title">Reservasi</h2>
-          <p className="reservation-text">Hubungi kami sekarang untuk reservasi dan informasi lebih lanjut</p>
+          <h2 className="section-title" data-aos="fade-up">Reservasi</h2>
+          <p className="reservation-text" data-aos="fade-up" data-aos-delay="100">Hubungi kami sekarang untuk reservasi dan informasi lebih lanjut</p>
           <a
             href="https://wa.me/6281234567890"
             target="_blank"
             rel="noopener noreferrer"
             className="cta-button"
+            data-aos="zoom-in"
+            data-aos-delay="200"
           >
             Chat WhatsApp
           </a>

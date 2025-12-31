@@ -23,10 +23,10 @@ const BusDetailPage = () => {
 
   const busData = {
     bus1: {
-      name: 'Masriried',
-      image: '/img/bus1.jpeg',
-      images: ['/img/bus1a.jpeg', '/img/bus1b.jpeg', '/img/bus1c.jpeg'],
-      description: 'Bus premium dengan fasilitas terlengkap untuk kenyamanan perjalanan Anda'
+      name: 'Masrafi',
+      image: '/img/bus1.webp',
+      images: ['/img/bus1a.jpeg', '/img/bus1b.jpeg', '/img/bus1c.webp'],
+      description: 'Bus medium yang nyaman untuk perjalanan jarak menengah'
     },
     bus2: {
       name: 'Petr Cech',
@@ -35,10 +35,10 @@ const BusDetailPage = () => {
       description: 'Bus executive dengan desain modern dan elegan'
     },
     bus3: {
-      name: 'Masrafi',
-      image: '/img/bus3.webp',
-      images: ['/img/bus3a.jpeg', '/img/bus3b.jpeg', '/img/bus3c.webp'],
-      description: 'Bus medium yang nyaman untuk perjalanan jarak menengah'
+      name: 'Masriried',
+      image: '/img/bus3.jpeg',
+      images: ['/img/bus3a.jpeg', '/img/bus3b.jpeg', '/img/bus3c.jpeg'],
+      description: 'Bus premium dengan fasilitas terlengkap untuk kenyamanan perjalanan Anda'
     }
   };
 
@@ -59,6 +59,8 @@ const BusDetailPage = () => {
   const docImages = currentBus.images;
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 3 >= docImages.length ? 0 : prev + 3));
     }, 5000);
@@ -90,10 +92,10 @@ const BusDetailPage = () => {
       {/* Facilities Section */}
       <section className="facilities-section">
         <div className="container">
-          <h2 className="section-title">Fasilitas</h2>
+          <h2 className="section-title" data-aos="fade-up">Fasilitas</h2>
           <div className="facilities-grid">
             {facilities.map((facility, index) => (
-              <div key={index} className="facility-item">
+              <div key={index} className="facility-item" data-aos="zoom-in" data-aos-delay={index * 50}>
                 <div className="facility-icon">{facility.icon}</div>
                 <p>{facility.name}</p>
               </div>
@@ -105,8 +107,8 @@ const BusDetailPage = () => {
       {/* Documentation Section */}
       <section className="bus-documentation-section">
         <div className="container">
-          <h2 className="section-title">Galeri</h2>
-          <div className="bus-doc-slider-container">
+          <h2 className="section-title" data-aos="fade-up">Galeri</h2>
+          <div className="bus-doc-slider-container" data-aos="fade-up" data-aos-delay="200">
             <button className="slider-arrow left" onClick={handlePrev}>
               <FaChevronLeft />
             </button>
@@ -130,7 +132,7 @@ const BusDetailPage = () => {
               <FaChevronRight />
             </button>
           </div>
-          <p className="gallery-description">{currentBus.description}</p>
+          <p className="gallery-description" data-aos="fade-up" data-aos-delay="300">{currentBus.description}</p>
         </div>
       </section>
 

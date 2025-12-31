@@ -7,7 +7,7 @@ const Footer = () => {
     <>
       <footer className="footer">
         <div className="footer-container">
-          <div className="footer-left">
+          <div className="footer-left" data-aos="fade-right">
             <div className="footer-logo">
               <span className="logo-text">Era Trans</span>
             </div>
@@ -22,7 +22,7 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="footer-right">
+          <div className="footer-right" data-aos="fade-left">
             <h3>Hubungi Kami</h3>
             <div className="footer-social">
               <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" className="social-link">
@@ -42,7 +42,7 @@ const Footer = () => {
         </div>
       </footer>
 
-      <div className="powered-by">
+      <div className="powered-by" data-aos="fade-up">
         Powered by Hyk Tech
       </div>
     </>
