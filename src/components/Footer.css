@@ -101,4 +101,8 @@
     grid-template-columns: 1fr;
     gap: 2rem;
   }
+
+  .powered-by {
+    color: white;
+  }
 }
