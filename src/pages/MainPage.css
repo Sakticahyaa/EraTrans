@@ -32,7 +32,6 @@
   background-position: bottom;
   opacity: 0;
   transition: opacity 1s ease-in-out;
-  background-attachment: fixed;
 }
 
 .hero-image.active {
@@ -418,7 +417,18 @@
 /* Responsive */
 @media (max-width: 768px) {
   .hero-section {
+    height: calc(100vh - 90px);
     justify-content: center;
+  }
+
+  .hero-background {
+    height: 100% !important;
+    transform: none !important;
+  }
+
+  .hero-image {
+    background-position: bottom !important;
+    background-attachment: scroll;
   }
 
   .hero-content {
