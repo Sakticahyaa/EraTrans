@@ -1,0 +1,98 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 1.5rem 0;
+  transition: all 0.3s ease;
+  background: rgba(10, 30, 61, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+.navbar.scrolled {
+  padding: 1rem 0;
+  background: rgba(10, 30, 61, 0.8);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.navbar-logo {
+  position: absolute;
+  right: 20px;
+}
+
+.navbar-logo .logo-text {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-white);
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+}
+
+.navbar-logo:hover .logo-text {
+  color: var(--light-blue);
+}
+
+.navbar-menu {
+  display: flex;
+  list-style: none;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.navbar-menu li {
+  color: var(--text-white);
+  font-weight: 500;
+  cursor: pointer;
+  position: relative;
+  padding: 0.5rem 0;
+  transition: color 0.3s ease;
+}
+
+.navbar-menu li::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: var(--light-blue);
+  transition: width 0.3s ease;
+}
+
+.navbar-menu li:hover {
+  color: var(--light-blue);
+}
+
+.navbar-menu li:hover::after {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .navbar-container {
+    justify-content: space-between;
+  }
+
+  .navbar-logo {
+    position: static;
+  }
+
+  .navbar-logo .logo-text {
+    font-size: 1.4rem;
+  }
+
+  .navbar-menu {
+    display: none;
+  }
+}
