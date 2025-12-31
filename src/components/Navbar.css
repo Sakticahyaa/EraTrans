@@ -77,20 +77,56 @@
   width: 100%;
 }
 
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-white);
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 1001;
+}
+
 @media (max-width: 768px) {
   .navbar-container {
     justify-content: space-between;
-  }
-
-  .navbar-logo {
-    position: static;
   }
 
   .navbar-logo .logo-text {
     font-size: 1.4rem;
   }
 
+  .hamburger {
+    display: block;
+  }
+
   .navbar-menu {
+    position: fixed;
+    top: 80px;
+    right: -100%;
+    width: 50%;
+    height: auto;
+    background: var(--primary-blue);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem 1rem;
+    transition: right 0.3s ease;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+    border-radius: 0 0 0 15px;
+  }
+
+  .navbar-menu.active {
+    right: 0;
+  }
+
+  .navbar-menu li {
+    font-size: 1.1rem;
+    padding: 0.5rem 0;
+  }
+
+  .navbar-menu li::after {
     display: none;
   }
 }

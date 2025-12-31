@@ -25,7 +25,7 @@ const BusDetailPage = () => {
     bus1: {
       name: 'Masrafi',
       image: '/img/bus1.webp',
-      images: ['/img/bus1a.jpeg', '/img/bus1b.jpeg', '/img/bus1c.webp'],
+      images: ['/img/bus1a.jpeg', '/img/bus1b.jpeg', '/img/bus1c.jpeg'],
       description: 'Bus medium yang nyaman untuk perjalanan jarak menengah'
     },
     bus2: {
@@ -37,7 +37,7 @@ const BusDetailPage = () => {
     bus3: {
       name: 'Masriried',
       image: '/img/bus3.jpeg',
-      images: ['/img/bus3a.jpeg', '/img/bus3b.jpeg', '/img/bus3c.jpeg'],
+      images: ['/img/bus3a.jpeg', '/img/bus3b.jpeg', '/img/bus3c.webp'],
       description: 'Bus premium dengan fasilitas terlengkap untuk kenyamanan perjalanan Anda'
     }
   };
@@ -69,11 +69,21 @@ const BusDetailPage = () => {
   }, [docImages.length]);
 
   const handlePrev = () => {
-    setCurrentSlide((prev) => (prev - 3 < 0 ? Math.max(0, docImages.length - 3) : prev - 3));
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+      setCurrentSlide((prev) => (prev - 1 < 0 ? docImages.length - 1 : prev - 1));
+    } else {
+      setCurrentSlide((prev) => (prev - 3 < 0 ? Math.max(0, docImages.length - 3) : prev - 3));
+    }
   };
 
   const handleNext = () => {
-    setCurrentSlide((prev) => (prev + 3 >= docImages.length ? 0 : prev + 3));
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+      setCurrentSlide((prev) => (prev + 1 >= docImages.length ? 0 : prev + 1));
+    } else {
+      setCurrentSlide((prev) => (prev + 3 >= docImages.length ? 0 : prev + 3));
+    }
   };
 
   return (
@@ -115,17 +125,30 @@ const BusDetailPage = () => {
             <div className="bus-doc-slider">
               <div
                 className="bus-doc-slider-track"
-                style={{ transform: `translateX(-${(currentSlide / 3) * 100}%)` }}
+                style={{
+                  transform: window.innerWidth <= 768
+                    ? `translateX(-${currentSlide * 100}%)`
+                    : `translateX(-${(currentSlide / 3) * 100}%)`
+                }}
               >
-                {Array.from({ length: Math.ceil(docImages.length / 3) }).map((_, slideIndex) => (
-                  <div key={slideIndex} className="bus-doc-slide">
-                    {docImages.slice(slideIndex * 3, slideIndex * 3 + 3).map((img, imgIndex) => (
-                      <div key={imgIndex} className="bus-doc-image">
-                        <img src={img} alt={`${currentBus.name} ${slideIndex * 3 + imgIndex + 1}`} />
+                {window.innerWidth <= 768
+                  ? docImages.map((img, index) => (
+                      <div key={index} className="bus-doc-slide">
+                        <div className="bus-doc-image">
+                          <img src={img} alt={`${currentBus.name} ${index + 1}`} />
+                        </div>
                       </div>
-                    ))}
-                  </div>
-                ))}
+                    ))
+                  : Array.from({ length: Math.ceil(docImages.length / 3) }).map((_, slideIndex) => (
+                      <div key={slideIndex} className="bus-doc-slide">
+                        {docImages.slice(slideIndex * 3, slideIndex * 3 + 3).map((img, imgIndex) => (
+                          <div key={imgIndex} className="bus-doc-image">
+                            <img src={img} alt={`${currentBus.name} ${slideIndex * 3 + imgIndex + 1}`} />
+                          </div>
+                        ))}
+                      </div>
+                    ))
+                }
               </div>
             </div>
             <button className="slider-arrow right" onClick={handleNext}>

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { FaBars, FaTimes } from 'react-icons/fa';
 import './Navbar.css';
 
 const Navbar = ({ showSections = true }) => {
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,7 +20,12 @@ const Navbar = ({ showSections = true }) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+      setMenuOpen(false);
     }
+  };
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
   };
 
   return (
@@ -29,13 +36,19 @@ const Navbar = ({ showSections = true }) => {
         </Link>
 
         {showSections && (
-          <ul className="navbar-menu">
-            <li onClick={() => scrollToSection('hero')}>Beranda</li>
-            <li onClick={() => scrollToSection('layanan')}>Layanan</li>
-            <li onClick={() => scrollToSection('armada')}>Armada</li>
-            <li onClick={() => scrollToSection('dokumentasi')}>Dokumentasi</li>
-            <li onClick={() => scrollToSection('reservasi')}>Reservasi</li>
-          </ul>
+          <>
+            <button className="hamburger" onClick={toggleMenu}>
+              {menuOpen ? <FaTimes /> : <FaBars />}
+            </button>
+
+            <ul className={`navbar-menu ${menuOpen ? 'active' : ''}`}>
+              <li onClick={() => scrollToSection('hero')}>Beranda</li>
+              <li onClick={() => scrollToSection('layanan')}>Layanan</li>
+              <li onClick={() => scrollToSection('armada')}>Armada</li>
+              <li onClick={() => scrollToSection('dokumentasi')}>Dokumentasi</li>
+              <li onClick={() => scrollToSection('reservasi')}>Reservasi</li>
+            </ul>
+          </>
         )}
       </div>
     </nav>

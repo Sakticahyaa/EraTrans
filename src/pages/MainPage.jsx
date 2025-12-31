@@ -152,7 +152,11 @@ const MainPage = () => {
             <div className="doc-slider">
               <div
                 className="doc-slider-track"
-                style={{ transform: `translateX(-${currentDocSlide * (33.333 + 1.5)}%)` }}
+                style={{
+                  transform: window.innerWidth <= 768
+                    ? `translateX(-${currentDocSlide * 100}%)`
+                    : `translateX(-${currentDocSlide * (33.333 + 1.5)}%)`
+                }}
               >
                 {[...docImages, ...docImages, ...docImages].map((img, index) => (
                   <div key={index} className="doc-slide">
