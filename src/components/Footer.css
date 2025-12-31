@@ -103,6 +103,8 @@
   }
 
   .powered-by {
-    color: white;
+    color: white !important;
+    opacity: 1 !important;
+    visibility: visible !important;
   }
 }
